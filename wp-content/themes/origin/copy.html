@@ -1,0 +1,47 @@
+foreach ($custom_post as $post) : setup_postdata($post); ?>
+<dt><?php the_title() ?></dt>
+<dd>
+  <h3>
+    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+  </h3>
+  <p>
+    <img
+      src="<?php echo bloginfo('template_directory') ?>/images/post-images/img1.png"
+      alt="Alt text to go here"
+    /><?php the_excerpt() ?>
+  </p>
+  <a href="" class="more">Read more</a>
+</dd>
+<?php
+                endforeach;
+                wp_reset_postdata();
+
+                ?>
+<?php include(TEMPLATEPATH . './searchform.php'); ?>
+
+<dl class="easy-accordion">
+  <?php
+  is_numeric(get_option('origin-num-slides')) ? $num_slides = get_option('origin-num-slides') : $num_slides = 6 ;
+  global $post;
+  $args = array('numberposts' =>
+  $num_slides, 'category' => 3); $custom_post = get_posts($args); foreach
+  ($custom_post as $post) : setup_postdata($post); ?>
+  <dt><?php the_title() ?></dt>
+  <dd>
+    <h3>
+      <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+    </h3>
+    <p>
+      <?php the_post_thumbnail(); ?>
+      <?php the_excerpt() ?>
+      <!-- <a href="" class="more">Read more</a> -->
+    </p>
+  </dd>
+  <?php
+  endforeach;
+  wp_reset_postdata();
+
+  ?>
+</dl>
+
+<script src="<?php echo bloginfo('template_directory') ?>/js/easyAccordionFixed.js"></script>
